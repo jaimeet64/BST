@@ -54,8 +54,73 @@ void BST::AddLeafPrivate(int key, node* Ptr)
 	}
 	else
 	{
-		cout << "The Key" << key << " has already been addedto the tree \n";
+		cout << "The Key" << key << " has already been added to the tree \n";
 	}
 
 }
 
+void BST::PrintInOrder()
+{
+	PrintInOrderPrivate(root);
+}
+
+void BST::PrintInOrderPrivate(node* Ptr)
+{
+	if(root !=  NULL)
+	{
+		if(Ptr->left!= NULL)
+		{
+			PrintInOrderPrivate(Ptr->left);
+			cout << "Going LEFT \n" << endl;
+		}
+		cout << Ptr->key << "  " << endl;;
+		if(Ptr->right != NULL)
+		{
+			PrintInOrderPrivate(Ptr->right);
+			cout << "Going RIGHT \n" << endl;
+		}
+	}
+	else
+	{
+		cout << "The tree is empty \n" << endl;
+	}
+}
+
+BST::node* BST::ReturnNode(int key)
+{
+	ReturnNodePrivate(key,root);
+}
+
+BST::node* BST::ReturnNodePrivate(int key, node* Ptr)
+{
+	if (Ptr != NULL)
+	{
+		if (Ptr-> key == key)
+		{
+			return Ptr;
+		}
+
+		else
+			if (key < Ptr->key)
+			{
+				return ReturnNodePrivate(key,  Ptr->left);
+			}
+			else if(key > Ptr->key)
+			{
+				return ReturnNodePrivate(key,  Ptr->right);
+			}
+	}
+	else
+		return NULL;
+}
+
+
+int BST::ReturnRootKey()
+{
+	if(root!= NULL)
+	{
+		return root->key;
+	}
+	else
+		return -1000;
+}
